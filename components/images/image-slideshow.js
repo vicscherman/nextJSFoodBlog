@@ -1,6 +1,7 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-
 
 import burgerImg from '@/assets/burger.jpg';
 import curryImg from '@/assets/curry.jpg';
@@ -15,7 +16,7 @@ const images = [
   { image: burgerImg, alt: 'A delicious, juicy burger' },
   { image: curryImg, alt: 'A delicious, spicy curry' },
   { image: dumplingsImg, alt: 'Steamed dumplings' },
-  { image: macncheeseImg, alt: 'Mac and cheese' },
+  { image: macncheeseImg, alt: "I'm Mac and he's cheese" },
   { image: pizzaImg, alt: 'A delicious pizza' },
   { image: schnitzelImg, alt: 'A delicious schnitzel' },
   { image: tomatoSaladImg, alt: 'A delicious tomato salad' },
@@ -24,18 +25,26 @@ const images = [
 export default function ImageSlideshow() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  function handleImgIndex() {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex < images.length - 1 ? prevIndex + 1 : 0
+    );
+  }
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex < images.length - 1 ? prevIndex + 1 : 0
-      );
+      handleImgIndex();
     }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
+  const handleImgClick = () => {
+    handleImgIndex();
+  };
+
   return (
-    <div className={classes.slideshow}>
+    <div className={classes.slideshow} onClick={handleImgClick}>
       {images.map((image, index) => (
         <Image
           key={index}
