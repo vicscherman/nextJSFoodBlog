@@ -1,0 +1,9 @@
+.linkback {
+  text-decoration: none;
+  color: #fe9d20;
+  transition: 0.5s ease;
+}
+
+.linkback:hover {
+  font-size: 1.05rem;
+}
